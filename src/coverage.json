@@ -1,0 +1,208 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-23T09:32:54.135Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 10,
+    "implemented": 8,
+    "items": [
+      {
+        "id": "REQ-18",
+        "summary": "Fix TypeScript compilation errors in frontend code: ensure all imports resolve correctly, all component props are properly typed, and no unused variables or implicit 'any' types exist that would prevent production build",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/LoginScreen.tsx",
+          "frontend/src/components/ProfileSetup.tsx",
+          "frontend/src/components/ContextualUpgradePrompt.tsx",
+          "frontend/src/pages/Calculator.tsx",
+          "frontend/src/pages/Invoices.tsx",
+          "frontend/src/pages/Learn.tsx",
+          "frontend/src/pages/Reminders.tsx",
+          "frontend/src/pages/CaSupport.tsx",
+          "frontend/src/utils/gstCalculations.ts",
+          "frontend/src/utils/invoiceLimits.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/ProfileSetup.tsx",
+          "frontend/src/components/ContextualUpgradePrompt.tsx",
+          "frontend/src/pages/Calculator.tsx",
+          "frontend/src/pages/Invoices.tsx",
+          "frontend/src/pages/Learn.tsx",
+          "frontend/src/pages/Reminders.tsx",
+          "frontend/src/pages/CaSupport.tsx",
+          "frontend/src/utils/gstCalculations.ts",
+          "frontend/src/utils/invoiceLimits.ts"
+        ]
+      },
+      {
+        "id": "REQ-19",
+        "summary": "Fix Motoko syntax errors and type mismatches in backend/main.mo: ensure all data types are correctly defined, function signatures match their implementations, and no compilation errors exist",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-20",
+        "summary": "Validate and fix all React Query hooks in frontend/src/hooks/useQueries.ts to ensure proper error handling, correct mutation return types, and proper cache invalidation patterns",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/hooks/useActor.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useQueries.ts"
+        ]
+      },
+      {
+        "id": "REQ-21",
+        "summary": "Fix any missing or incorrect actor method calls in frontend components: verify that all backend method names match the actual actor interface, parameters are passed in correct order and type, and optional values are properly handled",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/Calculator.tsx",
+          "frontend/src/pages/Invoices.tsx",
+          "frontend/src/pages/Learn.tsx",
+          "frontend/src/pages/Reminders.tsx",
+          "frontend/src/pages/CaSupport.tsx",
+          "frontend/src/pages/TaxTips.tsx",
+          "frontend/src/components/ProfileSetup.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/Calculator.tsx",
+          "frontend/src/pages/Invoices.tsx",
+          "frontend/src/pages/Learn.tsx",
+          "frontend/src/pages/Reminders.tsx",
+          "frontend/src/pages/CaSupport.tsx",
+          "frontend/src/components/ProfileSetup.tsx"
+        ]
+      },
+      {
+        "id": "REQ-22",
+        "summary": "Ensure frontend routing configuration in App.tsx has no circular dependencies, all route paths are unique, and lazy-loaded components are properly wrapped in error boundaries",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/BottomNav.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-23",
+        "summary": "Fix localStorage usage in useLearningProgress hook to handle parse errors gracefully and provide fallback values if stored data is corrupted or unavailable",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useLearningProgress.ts",
+          "frontend/src/pages/Learn.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useLearningProgress.ts",
+          "frontend/src/pages/Learn.tsx"
+        ]
+      },
+      {
+        "id": "REQ-24",
+        "summary": "Validate that all enum mappings between frontend and backend are consistent: verify GstSlab values (5, 12, 18, 28), DueDateType variants, Category types, and Plan types match exactly in both systems",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/utils/gstCalculations.ts",
+          "frontend/src/pages/Calculator.tsx",
+          "frontend/src/pages/Invoices.tsx",
+          "frontend/src/pages/Reminders.tsx",
+          "frontend/src/pages/Learn.tsx",
+          "frontend/src/hooks/useLearningProgress.ts",
+          "frontend/src/hooks/useUserPlan.ts",
+          "frontend/src/pages/CaSupport.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/utils/gstCalculations.ts",
+          "frontend/src/pages/Calculator.tsx",
+          "frontend/src/pages/Invoices.tsx",
+          "frontend/src/pages/Reminders.tsx",
+          "frontend/src/pages/Learn.tsx",
+          "frontend/src/hooks/useLearningProgress.ts",
+          "frontend/src/pages/CaSupport.tsx"
+        ]
+      },
+      {
+        "id": "REQ-25",
+        "summary": "Fix any missing environment variables or configuration issues: ensure canister IDs are correctly referenced, Internet Identity URL is valid, and all required build-time variables are properly set",
+        "status": "missing",
+        "plannedFiles": [
+          "frontend/src/hooks/useActor.ts",
+          "frontend/src/hooks/useInternetIdentity.ts",
+          "frontend/src/main.tsx"
+        ],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-26",
+        "summary": "Add proper error boundaries around critical UI sections to prevent entire app crashes from component-level errors, and implement fallback UI for error states",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/Layout.tsx",
+          "frontend/src/pages/Calculator.tsx",
+          "frontend/src/pages/Invoices.tsx",
+          "frontend/src/pages/Learn.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/pages/Calculator.tsx",
+          "frontend/src/pages/Invoices.tsx",
+          "frontend/src/pages/Learn.tsx"
+        ]
+      },
+      {
+        "id": "REQ-27",
+        "summary": "Verify and fix date handling throughout the application: ensure timestamp conversions between JavaScript Date and backend Int types are consistent, timezone handling is correct, and no invalid date operations cause runtime errors",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/Reminders.tsx",
+          "frontend/src/pages/Invoices.tsx",
+          "frontend/src/pages/Calculator.tsx",
+          "frontend/src/pages/CaSupport.tsx",
+          "frontend/src/pages/Dashboard.tsx",
+          "frontend/src/utils/invoiceLimits.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/Reminders.tsx",
+          "frontend/src/pages/Invoices.tsx",
+          "frontend/src/pages/Calculator.tsx",
+          "frontend/src/pages/CaSupport.tsx",
+          "frontend/src/utils/invoiceLimits.ts"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "build-request.json",
+    "build-template/README.md",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
+    "frontend/src/components/ContextualUpgradePrompt.tsx",
+    "frontend/src/components/ProfileSetup.tsx",
+    "frontend/src/hooks/useLearningProgress.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/pages/CaSupport.tsx",
+    "frontend/src/pages/Calculator.tsx",
+    "frontend/src/pages/Invoices.tsx",
+    "frontend/src/pages/Learn.tsx",
+    "frontend/src/pages/Reminders.tsx",
+    "frontend/src/utils/gstCalculations.ts",
+    "frontend/src/utils/invoiceLimits.ts",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

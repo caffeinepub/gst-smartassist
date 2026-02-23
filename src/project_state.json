@@ -1,0 +1,360 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "GST SmartAssist - A mobile-first SaaS app for Indian small business owners, students, and freelancers to manage GST calculations, invoices, reminders, and learning resources with Free/Premium tiers",
+  "architectural_notes": [
+    "Glide app with 7 separate tables: Users, GST Calculations, Invoices, Due Dates, Learning Section, Tax Tips, CA Leads",
+    "Use relations to link User Email across tables for multi-tenancy",
+    "Computed columns for all tax calculations (GST, CGST, SGST) - no manual formulas",
+    "Visibility conditions based on User Plan field (Free vs Premium)",
+    "Rollup columns for invoice grand totals",
+    "Row count logic to enforce Free tier invoice limit (3/month)",
+    "Tab navigation at bottom for mobile-first experience",
+    "Razorpay payment integration for Premium subscriptions",
+    "Future-ready structure for Hindi support, expense tracker, profit dashboard, AI chatbot",
+    "Admin manual plan upgrade workflow post-payment"
+  ],
+  "known_issues": [
+    "Publish/deployment issues - build may contain errors preventing publication"
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-build-dashboard-screen-as-the-home-view-showing-personalized-welcome-message-with-user-s-name-quick-gst-calculator-button-navigating-to-calculator-create-invoice-button-navigating-to-invoice-form-preview-of-next-3-upcoming-due-dates-with-dates-and-titles-conditional-upgrade-to-premium-banner-visible-only-for-free-users-highlighting-key-benefits-use-mobile-first-card-layout-with-clear-visual-hierarchy-and-prominent-action-buttons",
+      "title": "Build Dashboard screen as the home view showing: personalized welcome message with user's name, Quick GST Calculator button navigating to calculator, Create Invoice button navigating to invoice form, preview of next 3 upcoming due dates with dates and titles, conditional 'Upgrade to Premium' banner (visible only for Free users highlighting key benefits). Use mobile-first card layout with clear visual hierarchy and prominent action buttons.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-gst-calculator-screen-with-form-inputs-base-amount-number-input-gst-slab-selector-radio-buttons-or-dropdown-5-12-18-28-inclusive-exclusive-toggle-switch-display-computed-results-instantly-below-inputs-gst-amount-cgst-50-of-gst-sgst-50-of-gst-total-amount-include-save-calculation-button-to-persist-the-calculation-show-calculation-history-list-below-with-option-to-delete-saved-calculations",
+      "title": "Build GST Calculator screen with form inputs: base amount (number input), GST slab selector (radio buttons or dropdown: 5%, 12%, 18%, 28%), inclusive/exclusive toggle switch. Display computed results instantly below inputs: GST Amount, CGST (50% of GST), SGST (50% of GST), Total Amount. Include 'Save Calculation' button to persist the calculation. Show calculation history list below with option to delete saved calculations.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-invoice-generator-screen-with-form-to-add-invoice-details-customer-name-customer-phone-item-name-quantity-price-gst-slab-selector-display-auto-computed-item-total-gst-amount-and-grand-total-include-save-invoice-button-below-form-show-invoice-history-list-with-invoice-number-customer-name-date-grand-total-and-status-free-users-see-limit-indicator-x-of-3-invoices-used-this-month-add-invoice-detail-view-with-option-to-share-or-download",
+      "title": "Build Invoice Generator screen with form to add invoice details: customer name, customer phone, item name, quantity, price, GST slab selector. Display auto-computed item total, GST amount, and grand total. Include 'Save Invoice' button. Below form, show invoice history list with invoice number, customer name, date, grand total, and status. Free users see limit indicator (X of 3 invoices used this month). Add invoice detail view with option to share or download.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-reminder-screen-displaying-upcoming-due-dates-in-calendar-timeline-view-show-each-deadline-with-title-type-badge-date-and-countdown-include-add-custom-reminder-button-opening-form-for-custom-due-dates-allow-users-to-toggle-reminder-notifications-on-off-for-each-deadline-sort-deadlines-chronologically-showing-nearest-dates-first",
+      "title": "Build Reminder screen displaying upcoming due dates in calendar/timeline view. Show each deadline with title, type badge, date, and countdown. Include 'Add Custom Reminder' button opening form for custom due dates. Allow users to toggle reminder notifications on/off for each deadline. Sort deadlines chronologically showing nearest dates first.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-learn-gst-screen-with-card-based-layout-displaying-learning-topics-grouped-by-category-gst-basics-itc-filing-each-card-shows-topic-title-and-short-description-tapping-a-card-opens-full-content-view-with-detailed-explanation-if-topic-has-a-quiz-display-question-with-multiple-choice-answers-show-correct-incorrect-feedback-and-display-explanation-track-and-display-user-progress-e-g-x-of-y-topics-completed-per-category-with-visual-progress-indicators",
+      "title": "Build Learn GST screen with card-based layout displaying learning topics grouped by category (GST Basics, ITC, Filing). Each card shows topic title and short description. Tapping a card opens full content view with detailed explanation. If topic has a quiz, display question with multiple choice answers, show correct/incorrect feedback, and display explanation. Track and display user progress (e.g., X of Y topics completed per category) with visual progress indicators.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-upgrade-screen-explaining-premium-plan-benefits-rupee-49-month-pricing-unlimited-invoices-ad-free-experience-advanced-tax-tips-access-priority-ca-support-include-feature-comparison-table-free-vs-premium-add-prominent-upgrade-now-button-that-opens-razorpay-payment-link-in-new-tab-or-embedded-checkout-display-current-plan-status-and-expiry-date-for-premium-users-show-success-message-after-upgrade-with-instructions-that-admin-will-activate-premium-access",
+      "title": "Build Upgrade screen explaining Premium plan benefits: rupee 49/month pricing, unlimited invoices, ad-free experience, advanced tax tips access, priority CA support. Include feature comparison table (Free vs Premium). Add prominent 'Upgrade Now' button that opens Razorpay payment link in new tab or embedded checkout. Display current plan status and expiry date for Premium users. Show success message after upgrade with instructions that admin will activate Premium access.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-plan-based-access-control-throughout-the-app-free-users-can-access-unlimited-gst-calculations-create-maximum-3-invoices-per-month-enforce-with-backend-validation-and-frontend-warning-view-only-non-premium-tax-tips-see-ad-banner-section-on-dashboard-and-other-screens-premium-users-get-unlimited-invoice-creation-access-to-all-tax-tips-including-premium-content-no-ad-banners-displayed-ability-to-submit-ca-support-queries-use-conditional-rendering-based-on-user-plan-field",
+      "title": "Implement plan-based access control throughout the app: Free users can access unlimited GST calculations, create maximum 3 invoices per month (enforce with backend validation and frontend warning), view only non-premium tax tips, see ad banner section on dashboard and other screens. Premium users get unlimited invoice creation, access to all tax tips including premium content, no ad banners displayed, ability to submit CA support queries. Use conditional rendering based on user plan field.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-blue-and-white-color-theme-throughout-the-application-with-clean-business-aesthetic-use-large-touch-friendly-buttons-optimized-for-mobile-implement-bottom-tab-navigation-with-icons-for-dashboard-calculator-invoices-reminders-learn-add-premium-badge-indicator-in-navigation-or-header-for-premium-users-ensure-all-screens-are-mobile-first-responsive-with-appropriate-spacing-readable-typography-and-clear-visual-hierarchy-use-simple-professional-icons-consistent-with-business-context",
+      "title": "Apply blue and white color theme throughout the application with clean business aesthetic. Use large, touch-friendly buttons optimized for mobile. Implement bottom tab navigation with icons for: Dashboard, Calculator, Invoices, Reminders, Learn. Add Premium badge indicator in navigation or header for Premium users. Ensure all screens are mobile-first responsive with appropriate spacing, readable typography, and clear visual hierarchy. Use simple, professional icons consistent with business context.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-monetization-ui-elements-for-free-users-display-banner-ad-placeholder-sections-on-dashboard-and-other-appropriate-screens-with-clear-visual-separation-for-premium-users-ensure-ad-sections-are-completely-hidden-add-subtle-upgrade-prompts-at-relevant-points-e-g-after-3rd-invoice-attempt-for-free-users-when-viewing-locked-premium-tips-that-link-to-upgrade-screen-make-upgrade-prompts-informative-but-not-intrusive",
+      "title": "Implement monetization UI elements: for Free users, display banner ad placeholder sections on Dashboard and other appropriate screens with clear visual separation. For Premium users, ensure ad sections are completely hidden. Add subtle upgrade prompts at relevant points (e.g., after 3rd invoice attempt for Free users, when viewing locked premium tips) that link to Upgrade screen. Make upgrade prompts informative but not intrusive.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-typescript-compilation-errors-in-frontend-code-ensure-all-imports-resolve-correctly-all-component-props-are-properly-typed-and-no-unused-variables-or-implicit-any-types-exist-that-would-prevent-production-build",
+      "title": "Fix TypeScript compilation errors in frontend code: ensure all imports resolve correctly, all component props are properly typed, and no unused variables or implicit 'any' types exist that would prevent production build",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-validate-and-fix-all-react-query-hooks-in-frontend-src-hooks-usequeries-ts-to-ensure-proper-error-handling-correct-mutation-return-types-and-proper-cache-invalidation-patterns",
+      "title": "Validate and fix all React Query hooks in frontend/src/hooks/useQueries.ts to ensure proper error handling, correct mutation return types, and proper cache invalidation patterns",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-any-missing-or-incorrect-actor-method-calls-in-frontend-components-verify-that-all-backend-method-names-match-the-actual-actor-interface-parameters-are-passed-in-correct-order-and-type-and-optional-values-are-properly-handled",
+      "title": "Fix any missing or incorrect actor method calls in frontend components: verify that all backend method names match the actual actor interface, parameters are passed in correct order and type, and optional values are properly handled",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-frontend-routing-configuration-in-app-tsx-has-no-circular-dependencies-all-route-paths-are-unique-and-lazy-loaded-components-are-properly-wrapped-in-error-boundaries",
+      "title": "Ensure frontend routing configuration in App.tsx has no circular dependencies, all route paths are unique, and lazy-loaded components are properly wrapped in error boundaries",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-localstorage-usage-in-uselearningprogress-hook-to-handle-parse-errors-gracefully-and-provide-fallback-values-if-stored-data-is-corrupted-or-unavailable",
+      "title": "Fix localStorage usage in useLearningProgress hook to handle parse errors gracefully and provide fallback values if stored data is corrupted or unavailable",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-validate-that-all-enum-mappings-between-frontend-and-backend-are-consistent-verify-gstslab-values-5-12-18-28-duedatetype-variants-category-types-and-plan-types-match-exactly-in-both-systems",
+      "title": "Validate that all enum mappings between frontend and backend are consistent: verify GstSlab values (5, 12, 18, 28), DueDateType variants, Category types, and Plan types match exactly in both systems",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-proper-error-boundaries-around-critical-ui-sections-to-prevent-entire-app-crashes-from-component-level-errors-and-implement-fallback-ui-for-error-states",
+      "title": "Add proper error boundaries around critical UI sections to prevent entire app crashes from component-level errors, and implement fallback UI for error states",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-verify-and-fix-date-handling-throughout-the-application-ensure-timestamp-conversions-between-javascript-date-and-backend-int-types-are-consistent-timezone-handling-is-correct-and-no-invalid-date-operations-cause-runtime-errors",
+      "title": "Verify and fix date handling throughout the application: ensure timestamp conversions between JavaScript Date and backend Int types are consistent, timezone handling is correct, and no invalid date operations cause runtime errors",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create Users table with authentication, plan management, and business details",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Build GST Calculations table with automatic tax computations (CGST/SGST)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Create Invoices table with auto-numbering, customer details, and rollup totals",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Build Due Dates table with preloaded Indian GST filing deadlines",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Create Learning Section table with quizzes and progress tracking",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Build Tax Tips table with premium content gating",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Create CA Leads table for user support queries",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Design Dashboard screen with quick actions and upgrade banner",
+      "reqIds": [
+        "AR-1"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Build GST Calculator screen with instant computed results",
+      "reqIds": [
+        "AR-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Create Invoice Generator screen with save and share functionality",
+      "reqIds": [
+        "AR-3"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Build Reminder screen with calendar and deadline notifications",
+      "reqIds": [
+        "AR-4"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Create Learn GST screen with card layout and quiz interaction",
+      "reqIds": [
+        "AR-5"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Design Upgrade screen with Razorpay integration (₹49/month)",
+      "reqIds": [
+        "AR-1"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Implement Free tier limits: 3 invoices/month, basic tips, ads visible",
+      "reqIds": [
+        "AR-1",
+        "AR-3"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Implement Premium tier: unlimited invoices, no ads, advanced features",
+      "reqIds": [
+        "AR-1",
+        "AR-3",
+        "AR-6"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Apply blue/white theme with mobile-first design and tab navigation",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Create Users data model in backend with fields: name (Text), email (Text, unique identifier), plan (Text variant: 'Free' or 'Premium'), subscriptionExpiryDate (optional Int timestamp), businessName (optional Text), gstin (optional Text), role (Text variant: 'User' or 'Admin'). Implement authentication using Internet Identity where the principal maps to user records.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Create GSTCalculations data model in backend with fields: userEmail (Text, relation to Users), baseAmount (Float), gstSlab (Nat variant: 5, 12, 18, or 28), isInclusive (Bool), gstAmount (computed Float), cgst (computed Float, half of gstAmount), sgst (computed Float, half of gstAmount), totalAmount (computed Float), timestamp (Int), isSaved (Bool). Implement backend functions to create, retrieve by user, and delete calculations with automatic computation of GST amounts based on slab and inclusive/exclusive mode.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "Create Invoices data model in backend with fields: userEmail (Text, relation to Users), invoiceNumber (Text, auto-generated unique ID), customerName (Text), customerPhone (Text), itemName (Text), quantity (Nat), price (Float), gstSlab (Nat), itemTotal (computed Float: quantity * price), gstAmount (computed Float), grandTotal (computed Float: itemTotal + gstAmount), status (Text), createdDate (Int timestamp), pdfLink (optional Text). Implement backend functions to create invoices with auto-incrementing invoice numbers, retrieve user invoices, and enforce Free tier limit of 3 invoices per month by checking user plan and invoice count.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-20",
+      "summary": "Create DueDates data model in backend with fields: title (Text), description (Text), dueDate (Int timestamp), dueDateType (Text variant: 'GST Filing', 'Advance Tax', or 'Custom'), reminderEnabled (Bool), notificationDate (optional Int timestamp), userEmail (optional Text, relation to Users for custom reminders). Preload Indian GST statutory due dates for the current financial year (GSTR-1, GSTR-3B monthly deadlines, quarterly deadlines, annual return dates). Implement functions to retrieve upcoming due dates, create custom reminders, and filter by type.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Create LearningContent data model in backend with fields: topicTitle (Text), description (Text), category (Text variant: 'GST Basics', 'ITC', or 'Filing'), quizQuestion (optional Text), correctAnswer (optional Text), explanation (optional Text), displayOrder (Nat). Preload educational content covering fundamental GST concepts, input tax credit rules, and filing procedures. Implement functions to retrieve content by category and track user progress (store completed topic IDs per user).",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-22",
+      "summary": "Create TaxTips data model in backend with fields: title (Text), shortDescription (Text), fullContent (Text), isPremiumOnly (Bool). Preload practical tax-saving tips and compliance guidance, marking advanced tips as premium-only. Implement functions to retrieve tips filtered by user plan (Free users see only non-premium tips, Premium users see all).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-23",
+      "summary": "Create CALeads data model in backend with fields: userEmail (Text, relation to Users), name (Text), phone (Text), queryDescription (Text), fileUpload (optional Text, file path or URL), status (Text variant: 'Pending', 'Assigned', or 'Closed'), createdDate (Int timestamp). Implement functions to submit CA support queries (Premium users only), retrieve user's query history, and admin functions to update query status.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-33",
+      "summary": "Design a professional, modern visual style for the application that reflects trustworthiness and clarity appropriate for business finance management. Use the blue and white color scheme with careful attention to contrast, spacing, and visual hierarchy. Ensure the design feels clean and uncluttered to support ease of use for small business owners with varying technical comfort levels. Apply consistent design patterns across all screens for navigation, forms, buttons, and data display.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-35",
+      "summary": "Fix Motoko syntax errors and type mismatches in backend/main.mo: ensure all data types are correctly defined, function signatures match their implementations, and no compilation errors exist",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-41",
+      "summary": "Fix any missing environment variables or configuration issues: ensure canister IDs are correctly referenced, Internet Identity URL is valid, and all required build-time variables are properly set",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "GST SmartAssist",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

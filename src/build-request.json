@@ -1,0 +1,203 @@
+{
+  "kind": "build_request",
+  "title": "Fix deployment errors and ensure safe publication",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-18",
+      "text": "Fix TypeScript compilation errors in frontend code: ensure all imports resolve correctly, all component props are properly typed, and no unused variables or implicit 'any' types exist that would prevent production build",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "search any errors and fix them for publish safely"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Frontend builds without TypeScript errors",
+        "No console warnings about missing types or unresolved imports",
+        "All React components have proper type definitions"
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "text": "Fix Motoko syntax errors and type mismatches in backend/main.mo: ensure all data types are correctly defined, function signatures match their implementations, and no compilation errors exist",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "search any errors and fix them for publish safely"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend compiles successfully with moc compiler",
+        "No type mismatches or undefined function errors",
+        "All actor methods have correct return types"
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "text": "Validate and fix all React Query hooks in frontend/src/hooks/useQueries.ts to ensure proper error handling, correct mutation return types, and proper cache invalidation patterns",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "search any errors and fix them for publish safely"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All query hooks properly handle loading and error states",
+        "Mutations correctly invalidate related queries",
+        "No runtime errors when backend calls fail"
+      ]
+    },
+    {
+      "id": "REQ-21",
+      "text": "Fix any missing or incorrect actor method calls in frontend components: verify that all backend method names match the actual actor interface, parameters are passed in correct order and type, and optional values are properly handled",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "search any errors and fix them for publish safely"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All actor method calls use correct method names from backend",
+        "Parameter types match backend function signatures",
+        "Optional fields are handled with proper null/undefined checks"
+      ]
+    },
+    {
+      "id": "REQ-22",
+      "text": "Ensure frontend routing configuration in App.tsx has no circular dependencies, all route paths are unique, and lazy-loaded components are properly wrapped in error boundaries",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "search any errors and fix them for publish safely"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Router initializes without errors",
+        "All page components load correctly",
+        "Navigation between routes works smoothly"
+      ]
+    },
+    {
+      "id": "REQ-23",
+      "text": "Fix localStorage usage in useLearningProgress hook to handle parse errors gracefully and provide fallback values if stored data is corrupted or unavailable",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "search any errors and fix them for publish safely"
+        ]
+      },
+      "acceptanceCriteria": [
+        "App does not crash if localStorage is unavailable",
+        "Invalid JSON in localStorage is handled gracefully",
+        "Progress tracking works in incognito/private browsing mode"
+      ]
+    },
+    {
+      "id": "REQ-24",
+      "text": "Validate that all enum mappings between frontend and backend are consistent: verify GstSlab values (5, 12, 18, 28), DueDateType variants, Category types, and Plan types match exactly in both systems",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "search any errors and fix them for publish safely"
+        ]
+      },
+      "acceptanceCriteria": [
+        "GST slab selections in frontend map correctly to backend enum",
+        "Category and type filters work without type mismatches",
+        "Plan-based access control operates correctly"
+      ]
+    },
+    {
+      "id": "REQ-25",
+      "text": "Fix any missing environment variables or configuration issues: ensure canister IDs are correctly referenced, Internet Identity URL is valid, and all required build-time variables are properly set",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "search any errors and fix them for publish safely"
+        ]
+      },
+      "acceptanceCriteria": [
+        "App connects to correct backend canister",
+        "Internet Identity login works in production",
+        "No undefined environment variable errors at runtime"
+      ]
+    },
+    {
+      "id": "REQ-26",
+      "text": "Add proper error boundaries around critical UI sections to prevent entire app crashes from component-level errors, and implement fallback UI for error states",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "search any errors and fix them for publish safely"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Component errors are caught and displayed gracefully",
+        "App remains functional even if one section fails",
+        "Users see helpful error messages instead of blank screens"
+      ]
+    },
+    {
+      "id": "REQ-27",
+      "text": "Verify and fix date handling throughout the application: ensure timestamp conversions between JavaScript Date and backend Int types are consistent, timezone handling is correct, and no invalid date operations cause runtime errors",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "search any errors and fix them for publish safely"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Due dates display correctly in user's timezone",
+        "Invoice creation dates are stored accurately",
+        "Date comparisons for filtering work correctly"
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify Internet Identity authentication flow in frontend/src/hooks/useInternetIdentity.ts",
+    "Preserve existing backend data models and actor interface signatures",
+    "Do not change the single-actor architecture in backend/main.mo",
+    "Keep all UI components in frontend/src/components/ui unchanged"
+  ],
+  "nonGoals": [
+    "Adding new features or functionality",
+    "Changing the visual design or styling",
+    "Modifying the pricing or subscription model",
+    "Restructuring the project architecture"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

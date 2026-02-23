@@ -1,0 +1,336 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Fix deployment errors and ensure safe publication",
+  "requirements": [
+    {
+      "id": "REQ-18",
+      "summary": "Fix TypeScript compilation errors in frontend code: ensure all imports resolve correctly, all component props are properly typed, and no unused variables or implicit 'any' types exist",
+      "acceptanceCriteria": [
+        "Frontend builds without TypeScript errors",
+        "No console warnings about missing types or unresolved imports",
+        "All React components have proper type definitions"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Review and fix TypeScript issues: ensure all imports are correctly resolved, router configuration has proper types, lazy-loaded components have correct type annotations, and no implicit 'any' types exist in state management or event handlers"
+        },
+        {
+          "path": "frontend/src/components/LoginScreen.tsx",
+          "operation": "modify",
+          "description": "Add explicit type definitions for all component props, ensure SVG icon components have proper TypeScript interfaces, and verify no implicit 'any' types in event handlers"
+        },
+        {
+          "path": "frontend/src/components/ProfileSetup.tsx",
+          "operation": "modify",
+          "description": "Add type annotations for form state, ensure mutation hook return types are properly typed, verify all props and event handlers have explicit types"
+        },
+        {
+          "path": "frontend/src/components/ContextualUpgradePrompt.tsx",
+          "operation": "modify",
+          "description": "Add explicit type definitions for context prop and ensure all conditional rendering logic has proper type guards"
+        },
+        {
+          "path": "frontend/src/pages/Calculator.tsx",
+          "operation": "modify",
+          "description": "Review GST slab enum usage, ensure all numeric calculations have proper type annotations, verify form state types match backend interface, and fix any implicit 'any' types in event handlers"
+        },
+        {
+          "path": "frontend/src/pages/Invoices.tsx",
+          "operation": "modify",
+          "description": "Add explicit types for invoice form state, ensure quantity and price inputs have proper number type handling, verify GST slab enum types match backend, and fix any type mismatches in invoice creation logic"
+        },
+        {
+          "path": "frontend/src/pages/Learn.tsx",
+          "operation": "modify",
+          "description": "Ensure Category enum types match backend interface, add explicit types for quiz state management, verify learning progress types align with useLearningProgress hook, and fix any implicit 'any' types"
+        },
+        {
+          "path": "frontend/src/pages/Reminders.tsx",
+          "operation": "modify",
+          "description": "Add explicit types for reminder form state, ensure DueDateType enum matches backend Type enum, verify date handling has proper type annotations, and fix any implicit 'any' types in form handlers"
+        },
+        {
+          "path": "frontend/src/pages/CaSupport.tsx",
+          "operation": "modify",
+          "description": "Add explicit types for CA lead form state, ensure Status enum types match backend interface, verify file upload handling has proper type annotations, and fix any implicit 'any' types"
+        },
+        {
+          "path": "frontend/src/utils/gstCalculations.ts",
+          "operation": "modify",
+          "description": "Add explicit return type annotations for all utility functions, ensure GST slab enum conversions have proper type guards, and verify numeric calculation types are explicit"
+        },
+        {
+          "path": "frontend/src/utils/invoiceLimits.ts",
+          "operation": "modify",
+          "description": "Add explicit return types for limit checking functions, ensure date comparison logic has proper type annotations, and verify invoice count calculations use correct types"
+        }
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "summary": "Validate and fix all React Query hooks to ensure proper error handling, correct mutation return types, and proper cache invalidation patterns",
+      "acceptanceCriteria": [
+        "All query hooks properly handle loading and error states",
+        "Mutations correctly invalidate related queries",
+        "No runtime errors when backend calls fail"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Review all query and mutation hooks: ensure proper error handling with try-catch blocks, verify mutation onSuccess callbacks correctly invalidate related query keys, add proper TypeScript return types for all hooks, ensure queryFn error states are handled gracefully, and verify all backend method calls match the actor interface signatures"
+        },
+        {
+          "path": "frontend/src/hooks/useActor.ts",
+          "operation": "modify",
+          "description": "Ensure actor initialization properly handles errors, verify queryClient invalidation occurs at correct lifecycle points, add proper error boundaries around actor creation, and ensure type safety for actor method calls"
+        }
+      ]
+    },
+    {
+      "id": "REQ-21",
+      "summary": "Fix any missing or incorrect actor method calls in frontend components: verify that all backend method names match the actual actor interface, parameters are passed in correct order and type, and optional values are properly handled",
+      "acceptanceCriteria": [
+        "All actor method calls use correct method names from backend",
+        "Parameter types match backend function signatures",
+        "Optional fields are handled with proper null/undefined checks"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/Calculator.tsx",
+          "operation": "modify",
+          "description": "Verify createGstCalculation call matches backend signature (userEmail: string, baseAmount: number, gstSlab: Slab, isInclusive: boolean), ensure getCalculationsByUser uses correct parameter type, verify deleteCalculation passes timestamp as bigint, and add proper null checks for optional fields"
+        },
+        {
+          "path": "frontend/src/pages/Invoices.tsx",
+          "operation": "modify",
+          "description": "Verify createInvoice call matches backend signature with correct parameter order and types (userEmail, customerName, customerPhone, itemName, quantity as bigint, price as number, gstSlab enum), ensure getUserInvoices uses correct parameter, verify deleteInvoice passes correct invoiceNumber, and handle null return from createInvoice properly"
+        },
+        {
+          "path": "frontend/src/pages/Learn.tsx",
+          "operation": "modify",
+          "description": "Verify getAllLearningContent and getLearningContentByCategory calls match backend signatures, ensure Category enum values match backend (gstBasics, itc, filing), and handle optional quiz fields (quizQuestion, correctAnswer, explanation) with proper null checks"
+        },
+        {
+          "path": "frontend/src/pages/Reminders.tsx",
+          "operation": "modify",
+          "description": "Verify createCustomReminder matches backend signature (title, description, dueDate as bigint, reminderEnabled), ensure getUpcomingDueDates and getUserCustomReminders calls are correct, verify Type enum usage matches backend (gstFiling, advanceTax, custom), and handle optional notificationDate field properly"
+        },
+        {
+          "path": "frontend/src/pages/CaSupport.tsx",
+          "operation": "modify",
+          "description": "Verify submitCaLead matches backend signature (name, phone, queryDescription, fileUpload as string | null), ensure getUserCaLeads call is correct, verify Status enum values match backend (pending, assigned, closed), and handle optional fileUpload field with proper null handling"
+        },
+        {
+          "path": "frontend/src/pages/TaxTips.tsx",
+          "operation": "modify",
+          "description": "Verify getTaxTips backend call matches actor interface signature and handle the returned Array<T__4> type correctly with proper null checks for optional fields"
+        },
+        {
+          "path": "frontend/src/components/ProfileSetup.tsx",
+          "operation": "modify",
+          "description": "Verify saveCallerUserProfile matches backend signature with correct UserProfile type structure including optional fields (subscriptionExpiry as bigint, businessName, gstin), ensure Plan enum (free, premium) and Role enum (user, admin) match backend types"
+        }
+      ]
+    },
+    {
+      "id": "REQ-22",
+      "summary": "Ensure frontend routing configuration has no circular dependencies, all route paths are unique, and lazy-loaded components are properly wrapped in error boundaries",
+      "acceptanceCriteria": [
+        "Router initializes without errors",
+        "All page components load correctly",
+        "Navigation between routes works smoothly"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Review TanStack Router configuration: ensure all route paths are unique and properly defined, verify lazy-loaded page components use correct import paths and have proper fallback loading states, check for circular import dependencies, and wrap route components in error boundaries to catch component-level errors"
+        },
+        {
+          "path": "frontend/src/components/BottomNav.tsx",
+          "operation": "modify",
+          "description": "Verify all navigation links match defined route paths exactly, ensure active state detection works correctly with router state, and confirm no broken navigation links exist"
+        }
+      ]
+    },
+    {
+      "id": "REQ-23",
+      "summary": "Fix localStorage usage in useLearningProgress hook to handle parse errors gracefully and provide fallback values if stored data is corrupted or unavailable",
+      "acceptanceCriteria": [
+        "App does not crash if localStorage is unavailable",
+        "Invalid JSON in localStorage is handled gracefully",
+        "Progress tracking works in incognito/private browsing mode"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useLearningProgress.ts",
+          "operation": "modify",
+          "description": "Wrap localStorage access in try-catch blocks to handle QuotaExceededError and SecurityError exceptions, add JSON.parse error handling with fallback to empty progress state, implement feature detection to check if localStorage is available before use, provide in-memory fallback for private browsing modes, and ensure getCompletionPercentage handles missing or corrupted data gracefully"
+        },
+        {
+          "path": "frontend/src/pages/Learn.tsx",
+          "operation": "modify",
+          "description": "Ensure learning progress hook failures don't crash the component, add error boundaries or fallback UI if progress tracking fails, and verify completion percentage calculations handle edge cases (NaN, undefined) properly"
+        }
+      ]
+    },
+    {
+      "id": "REQ-24",
+      "summary": "Validate that all enum mappings between frontend and backend are consistent: verify GstSlab values (5, 12, 18, 28), DueDateType variants, Category types, and Plan types match exactly in both systems",
+      "acceptanceCriteria": [
+        "GST slab selections in frontend map correctly to backend enum",
+        "Category and type filters work without type mismatches",
+        "Plan-based access control operates correctly"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/utils/gstCalculations.ts",
+          "operation": "modify",
+          "description": "Verify gstSlabToPercentage and percentageToGstSlab functions correctly map between numeric values (5, 12, 18, 28) and backend Slab enum values (slab5, slab12, slab18, slab28), ensure bidirectional conversion is consistent, and add validation to prevent invalid slab values"
+        },
+        {
+          "path": "frontend/src/pages/Calculator.tsx",
+          "operation": "modify",
+          "description": "Verify GST slab selection UI uses backend Slab enum values (slab5, slab12, slab18, slab28) consistently, ensure conversion to percentages for display is correct, and verify saved calculations use proper enum values when calling backend"
+        },
+        {
+          "path": "frontend/src/pages/Invoices.tsx",
+          "operation": "modify",
+          "description": "Verify invoice GST slab selection matches backend Slab enum exactly, ensure invoice creation passes correct enum values to createInvoice backend method, and verify retrieved invoices display GST slabs correctly"
+        },
+        {
+          "path": "frontend/src/pages/Reminders.tsx",
+          "operation": "modify",
+          "description": "Verify reminder type selection uses backend Type enum values (gstFiling, advanceTax, custom) exactly as defined in backend interface, ensure type badges display correct values, and verify createCustomReminder passes correct DueDateType to backend"
+        },
+        {
+          "path": "frontend/src/pages/Learn.tsx",
+          "operation": "modify",
+          "description": "Verify category tabs use backend Category enum values (gstBasics, itc, filing) exactly, ensure getLearningContentByCategory passes correct enum values, and verify category-based filtering works with consistent enum mapping"
+        },
+        {
+          "path": "frontend/src/hooks/useLearningProgress.ts",
+          "operation": "modify",
+          "description": "Verify category key mappings (gstBasics, itc, filing) align exactly with backend Category enum, ensure completion tracking uses consistent category identifiers, and validate category-based progress calculations use correct enum values"
+        },
+        {
+          "path": "frontend/src/hooks/useUserPlan.ts",
+          "operation": "modify",
+          "description": "Verify Plan enum usage (free, premium) matches backend interface exactly, ensure premium status detection works correctly with backend Plan enum values, and verify subscription expiry handling uses correct bigint type"
+        },
+        {
+          "path": "frontend/src/pages/CaSupport.tsx",
+          "operation": "modify",
+          "description": "Verify Status enum values (pending, assigned, closed) match backend interface exactly, ensure status badges display correct enum values, and verify status filtering works with consistent enum mapping"
+        }
+      ]
+    },
+    {
+      "id": "REQ-25",
+      "summary": "Fix any missing environment variables or configuration issues: ensure canister IDs are correctly referenced, Internet Identity URL is valid, and all required build-time variables are properly set",
+      "acceptanceCriteria": [
+        "App connects to correct backend canister",
+        "Internet Identity login works in production",
+        "No undefined environment variable errors at runtime"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useActor.ts",
+          "operation": "modify",
+          "description": "Verify backend canister ID is correctly imported from generated declarations, ensure actor creation uses correct canister ID and agent configuration, verify local vs production canister ID handling is correct, and add fallback error handling if canister ID is undefined"
+        },
+        {
+          "path": "frontend/src/hooks/useInternetIdentity.ts",
+          "operation": "modify",
+          "description": "Verify Internet Identity URL is correctly set for both local and production environments, ensure AuthClient initialization uses correct II canister ID, verify identity delegation expiry is properly configured, and add error handling for II connection failures"
+        },
+        {
+          "path": "frontend/src/main.tsx",
+          "operation": "modify",
+          "description": "Verify all required environment variables are accessed correctly, ensure proper fallbacks for missing configuration, and add runtime checks for critical configuration values before app initialization"
+        }
+      ]
+    },
+    {
+      "id": "REQ-26",
+      "summary": "Add proper error boundaries around critical UI sections to prevent entire app crashes from component-level errors, and implement fallback UI for error states",
+      "acceptanceCriteria": [
+        "Component errors are caught and displayed gracefully",
+        "App remains functional even if one section fails",
+        "Users see helpful error messages instead of blank screens"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap route components in React error boundaries to catch rendering errors, implement fallback UI for error states that allows users to recover or navigate away, ensure error boundaries reset on navigation, and add error logging for debugging"
+        },
+        {
+          "path": "frontend/src/components/Layout.tsx",
+          "operation": "modify",
+          "description": "Wrap main content area in error boundary to catch component-level errors while keeping header and navigation functional, implement user-friendly error fallback UI with recovery options"
+        },
+        {
+          "path": "frontend/src/pages/Calculator.tsx",
+          "operation": "modify",
+          "description": "Add error handling for calculation failures, implement user-friendly error messages when GST calculation or save operations fail, and ensure partial failures don't crash the entire calculator page"
+        },
+        {
+          "path": "frontend/src/pages/Invoices.tsx",
+          "operation": "modify",
+          "description": "Add error handling for invoice creation failures, display user-friendly error messages when backend calls fail, and ensure invoice list remains accessible even if creation fails"
+        },
+        {
+          "path": "frontend/src/pages/Learn.tsx",
+          "operation": "modify",
+          "description": "Add error handling for learning content loading failures, implement fallback UI when topics fail to load, and ensure quiz functionality degrades gracefully on errors"
+        }
+      ]
+    },
+    {
+      "id": "REQ-27",
+      "summary": "Verify and fix date handling throughout the application: ensure timestamp conversions between JavaScript Date and backend Int types are consistent, timezone handling is correct, and no invalid date operations cause runtime errors",
+      "acceptanceCriteria": [
+        "Due dates display correctly in user's timezone",
+        "Invoice creation dates are stored accurately",
+        "Date comparisons for filtering work correctly"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/Reminders.tsx",
+          "operation": "modify",
+          "description": "Verify date input conversion to bigint timestamp (milliseconds since epoch) is correct for createCustomReminder backend call, ensure due date display converts bigint timestamps to JavaScript Date correctly, verify timezone handling shows dates in user's local timezone, add validation to prevent invalid date inputs, and ensure date comparisons for sorting work correctly with bigint timestamps"
+        },
+        {
+          "path": "frontend/src/pages/Invoices.tsx",
+          "operation": "modify",
+          "description": "Verify invoice createdDate (bigint) is correctly converted to readable date format for display, ensure date filtering and sorting work correctly with bigint timestamps, and add proper timezone handling for date displays"
+        },
+        {
+          "path": "frontend/src/pages/Calculator.tsx",
+          "operation": "modify",
+          "description": "Verify calculation timestamp (bigint) is correctly handled for save and delete operations, ensure history display converts timestamps to readable dates in user's timezone, and verify timestamp-based deletion works correctly"
+        },
+        {
+          "path": "frontend/src/pages/CaSupport.tsx",
+          "operation": "modify",
+          "description": "Verify CA lead createdDate (bigint) is correctly displayed as readable date, ensure date sorting works correctly with bigint timestamps, and add proper timezone handling for date displays"
+        },
+        {
+          "path": "frontend/src/pages/Dashboard.tsx",
+          "operation": "modify",
+          "description": "Verify upcoming due dates display correctly with proper date formatting, ensure date sorting works correctly to show next 3 due dates, verify timezone handling for due date display, and ensure date comparisons correctly identify upcoming vs past dates using bigint timestamps"
+        },
+        {
+          "path": "frontend/src/utils/invoiceLimits.ts",
+          "operation": "modify",
+          "description": "Verify current month calculation correctly compares invoice createdDate bigint timestamps with current date, ensure timezone handling doesn't cause off-by-one month errors, and verify date range calculations work correctly for invoice limit enforcement"
+        }
+      ]
+    }
+  ]
+}
